@@ -1,8 +1,10 @@
 package com.data2sense.gramasamy.autotrack;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,25 +14,32 @@ import com.data2sense.gramasamy.autotrack.MainActivity.*;
 
 public class StartTripActivity extends AppCompatActivity {
 
-    @Override
+    public static final String PREFS_NAME = RegisterActivity.PREFS_NAME;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Get current Registration details the SharedPreferences
+        SharedPreferences settings = getApplicationContext().getSharedPreferences(PREFS_NAME, 0);
+        String currentLicenceNumber = settings.getString("CURRENT_LICENCE_NUMBER", "----");
+        String currentDriverName = settings.getString("CURRENT_DRIVER_NAME", "----");
+        String currentDriverPhone = settings.getString("CURRENT_DRIVER_PHONE", "----");
+
+        // Get the intent from RegisterActivity
         Intent intent = getIntent();
 
+        // Set the content for this activity
         setContentView(R.layout.activity_start_trip);
 
-        // inject variables into activity_start_trip layout placeholders
-        String licenceNumber = intent.getStringExtra(RegisterActivity.LICENCE_NUMBER);
+        // inject variables from prefFile into activity_start_trip layout placeholders
         TextView licenceNumberTextView = (TextView) findViewById(R.id.auto_licence_display);
-        licenceNumberTextView.setText(licenceNumber);
+        licenceNumberTextView.setText(currentLicenceNumber);
 
-        String driverName = intent.getStringExtra(RegisterActivity.DRIVER_NAME);
         TextView driverNameTextView = (TextView) findViewById(R.id.driver_name_display);
-        driverNameTextView.setText(driverName);
+        driverNameTextView.setText(currentDriverName);
 
-        String driverPhone = intent.getStringExtra(RegisterActivity.DRIVER_PHONE);
         TextView driverPhoneTextView = (TextView) findViewById(R.id.driver_phone_display);
-        driverPhoneTextView.setText(driverPhone);
+        driverPhoneTextView.setText(currentDriverPhone);
 
     }
 
