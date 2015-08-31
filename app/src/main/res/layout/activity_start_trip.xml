@@ -2,11 +2,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:orientation="vertical"
     tools:context="com.data2sense.gramasamy.autotrack.StartTripActivity">
 
     <!-- Display the registration details as table -->
@@ -19,55 +19,55 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
+
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/layout_HWwrap_content"
                 android:text="@string/auto_licence_label" />
+
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/colon_separator"/>
+                style="@style/layout_HWwrap_content"
+                android:text="@string/colon_separator" />
+
             <TextView
                 android:id="@+id/auto_licence_display"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                style="@style/layout_HWwrap_content" />
+
         </LinearLayout>
         <!-- One row per data -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
+
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/layout_HWwrap_content"
                 android:text="@string/driver_name_label" />
+
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/colon_separator"/>
+                style="@style/layout_HWwrap_content"
+                android:text="@string/colon_separator" />
+
             <TextView
                 android:id="@+id/driver_name_display"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                style="@style/layout_HWwrap_content" />
         </LinearLayout>
         <!-- One row per data -->
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" >
+            style="@style/layout_HWwrap_content"
+            android:orientation="horizontal">
+
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/layout_HWwrap_content"
                 android:text="@string/driver_phone_label" />
+
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/colon_separator"/>
+                style="@style/layout_HWwrap_content"
+                android:text="@string/colon_separator" />
+
             <TextView
                 android:id="@+id/driver_phone_display"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                style="@style/layout_HWwrap_content" />
         </LinearLayout>
 
     </LinearLayout>
@@ -76,21 +76,16 @@
     <!-- start activity button -->
     <Button
         android:id="@+id/start_trip_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/CenterHoriNoCapButton"
         android:layout_below="@id/registration_info_table"
-        android:layout_centerHorizontal="true"
-        android:text="@string/start_trip_button_label"
-        android:textAllCaps="false"/>
+        android:text="@string/start_trip_button_label" />
 
     <!-- skip button -->
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/CenterHoriNoCapButton"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:text="@string/skip_button_label"
-        android:textAllCaps="false"
-        android:onClick="displayLocationLogScreen"/>
+        android:onClick="displayLocationLogScreen"
+        android:text="@string/skip_button_label" />
 
 </RelativeLayout>

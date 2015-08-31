@@ -36,35 +36,23 @@
 
         <Button
             android:id="@+id/register_button_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="30dp"
+            style="@style/CenterHoriNoCapButton"
             android:onClick="displayRegistrationForm"
-            android:text="@string/register_button_label"
-            android:textAllCaps="false" />
+            android:text="@string/register_button_label" />
 
         <Button
             android:id="@+id/start_trip_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/CenterHoriNoCapButton"
             android:layout_below="@id/register_button_view"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="30dp"
             android:onClick="displayStartTripScreen"
-            android:text="@string/start_trip_button_label"
-            android:textAllCaps="false" />
+            android:text="@string/start_trip_button_label" />
 
         <Button
             android:id="@+id/stop_trip_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/CenterHoriNoCapButton"
             android:layout_below="@id/start_trip_button"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="30dp"
             android:onClick="displayLocationLogScreen"
-            android:text="@string/start_log_button_label"
-            android:textAllCaps="false" />
+            android:text="@string/start_log_button_label" />
 
     </RelativeLayout>
 
