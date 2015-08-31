@@ -99,9 +99,23 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/registration_form_layout_4"
+        style="@style/layout_HWwrap_content"
+        android:layout_below="@id/registration_form_layout_3">
+
+        <TextView
+            style="@style/layout_HWwrap_content"
+            android:text="@string/date_registered_label" />
+        <TextView
+            android:id="@+id/registration_date_display_text_view"
+            style="@style/layout_HWwrap_content" />
+
+    </LinearLayout>
+
     <Button
         style="@style/CenterHoriNoCapButton"
-        android:layout_below="@id/registration_form_layout_3"
+        android:layout_below="@id/registration_form_layout_4"
         android:onClick="registerDriverAndDevice"
         android:text="@string/register_button_label" />
 
