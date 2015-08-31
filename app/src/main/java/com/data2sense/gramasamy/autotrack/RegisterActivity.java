@@ -15,6 +15,8 @@ import android.widget.TextView;
 public class RegisterActivity extends AppCompatActivity {
 
     public static final String PREFS_NAME = "MyPrefsFile";
+    // get the current system time
+    long currentTimeMilliseconds = System.currentTimeMillis();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,8 @@ public class RegisterActivity extends AppCompatActivity {
         String currentLicenceNumber = settings.getString("CURRENT_LICENCE_NUMBER", "----");
         String currentDriverName = settings.getString("CURRENT_DRIVER_NAME", "----");
         String currentDriverPhone = settings.getString("CURRENT_DRIVER_PHONE", "----");
+        Long timeRegistered = settings.getLong("CURRENT_REGISTRATION_TIME", 0);
+
 
         // Set the content for this activity
         setContentView(R.layout.activity_register);
@@ -41,6 +45,8 @@ public class RegisterActivity extends AppCompatActivity {
         TextView driverPhoneTextView = (TextView) findViewById(R.id.driver_phone_edit_text);
         driverPhoneTextView.setText(currentDriverPhone);
 
+        TextView registeredDateTextView = (TextView) findViewById(R.id.registration_date_display_text_view);
+        registeredDateTextView.setText(Long.toString(timeRegistered));
     }
 
     @Override
@@ -87,6 +93,7 @@ public class RegisterActivity extends AppCompatActivity {
         editor.putString("CURRENT_LICENCE_NUMBER", licenceNumber);
         editor.putString("CURRENT_DRIVER_NAME", driverName);
         editor.putString("CURRENT_DRIVER_PHONE", driverPhone);
+        editor.putLong("CURRENT_REGISTRATION_TIME", currentTimeMilliseconds);
 
         // Apply the edits!
         editor.apply();
