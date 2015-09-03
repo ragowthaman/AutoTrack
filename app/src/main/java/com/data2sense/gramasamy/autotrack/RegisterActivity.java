@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+
+
 public class RegisterActivity extends AppCompatActivity {
 
     public static final String PREFS_NAME = "MyPrefsFile";
