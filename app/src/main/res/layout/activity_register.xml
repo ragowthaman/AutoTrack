@@ -114,11 +114,13 @@
 
     </LinearLayout>
 
+    <!-- display latitude longitude -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/registration_form_layout_4"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:id="@+id/latlong_display">
 
         <TextView
             android:layout_width="wrap_content"
@@ -139,6 +141,21 @@
             android:id="@+id/register_longitude"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <!-- display latitude longitude -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:orientation="horizontal" android:layout_below="@id/latlong_display">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="android_id:"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/androidid_text_view"
+            />
 
     </LinearLayout>
 

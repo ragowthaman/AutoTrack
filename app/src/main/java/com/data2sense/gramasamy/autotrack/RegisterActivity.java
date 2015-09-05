@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.provider.Settings.Secure;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -18,6 +19,7 @@ import com.google.android.gms.location.LocationServices;
 
 public class RegisterActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
+    private static final String androidId = Secure.ANDROID_ID; // returns 'android_id' string in emulator
     public static final String PREFS_NAME = "MyPrefsFile";
     private GoogleApiClient mGoogleApiClient;
     private Location mLastLocation;
@@ -42,6 +44,7 @@ public class RegisterActivity extends AppCompatActivity implements GoogleApiClie
         } else {
             Log.i(ACTIVITY_TAG, "GOW:Location object is FULL");
             Log.d(ACTIVITY_TAG, mLastLocation.toString());
+            Log.i(ACTIVITY_TAG, androidId);
         }
     }
 
@@ -82,7 +85,7 @@ public class RegisterActivity extends AppCompatActivity implements GoogleApiClie
         Long timeRegistered = settings.getLong("CURRENT_REGISTRATION_TIME", 0);
         String longitudeRegistered = settings.getString("CURRENT_REGISTRATION_LONGITUDE", "----");
         String latitudeRegistered = settings.getString("CURRENT_REGISTRATION_LATITUDE", "----");
-
+        String androidIdString = settings.getString("ANDROID_ID", "---");
 
         // Set the content for this activity
         setContentView(R.layout.activity_register);
@@ -105,6 +108,9 @@ public class RegisterActivity extends AppCompatActivity implements GoogleApiClie
 
         TextView registeredLatitudeTextView = (TextView) findViewById(R.id.register_lattitude);
         registeredLatitudeTextView.setText(latitudeRegistered);
+
+        TextView androidIdTextView = (TextView) findViewById(R.id.androidid_text_view);
+        androidIdTextView.setText(androidIdString);
     }
 
     @Override
@@ -158,6 +164,7 @@ public class RegisterActivity extends AppCompatActivity implements GoogleApiClie
         EditText driverPhoneEditText = (EditText) findViewById(R.id.driver_phone_edit_text);
         String driverPhone = driverPhoneEditText.getText().toString();
 
+
         // Store the collected registration info in SharedPreference. Obtain in activities where needed
         // no more passing variables via intent
         SharedPreferences settings = getApplicationContext().getSharedPreferences(PREFS_NAME, 0);
@@ -168,12 +175,12 @@ public class RegisterActivity extends AppCompatActivity implements GoogleApiClie
         editor.putLong("CURRENT_REGISTRATION_TIME", currentTimeMilliseconds);
         editor.putString("CURRENT_REGISTRATION_LATITUDE", Double.toString(mLastLocation.getLatitude()));
         editor.putString("CURRENT_REGISTRATION_LONGITUDE", Double.toString(mLastLocation.getLongitude()));
+        editor.putString("ANDROID_ID", androidId);
 
         // Apply the edits!
         editor.apply();
 
         startActivity(intent);
     }
-
 
 }
