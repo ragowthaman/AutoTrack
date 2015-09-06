@@ -4,13 +4,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-
-import com.data2sense.gramasamy.autotrack.MainActivity.*;
 
 public class StartTripActivity extends AppCompatActivity {
 
@@ -67,7 +64,7 @@ public class StartTripActivity extends AppCompatActivity {
 
     /** Called when the user clicks Start logging button */
     public void displayLocationLogScreen(View view){
-        Intent intent = new Intent(this, LocationLogActivity.class);
+        Intent intent = new Intent(this, MiddleMenuActivity.class);
         startActivity(intent);
     }
 }

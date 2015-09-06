@@ -9,12 +9,12 @@ import android.view.View;
 
 
 
-public class LocationLogActivity extends AppCompatActivity {
+public class MiddleMenuActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_location_log);
+        setContentView(R.layout.activity_middle_menu);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class LocationLogActivity extends AppCompatActivity {
 
     /** Called when the user clicks Start logging button */
     public void displayLocationLogScreen(View view){
-        Intent intent = new Intent(this, LocationLogActivity.class);
+        Intent intent = new Intent(this, MiddleMenuActivity.class);
         startActivity(intent);
     }
 
@@ -62,6 +62,10 @@ public class LocationLogActivity extends AppCompatActivity {
     }
 
 
-
+    /** opens LogLocation activity when user cliks start logging button */
+    public void startLocationLoggingActivity(View view){
+        Intent intent = new Intent(this, LogLocationActivity.class);
+        startActivity(intent);
+    }
 
 }
