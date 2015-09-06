@@ -1,5 +1,6 @@
 package com.data2sense.gramasamy.autotrack;
 
+import android.content.Context;
 import android.content.IntentSender;
 import android.location.Location;
 import android.support.v4.app.FragmentActivity;
@@ -14,17 +15,27 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+
 public class LogLocationActivity extends FragmentActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
 
     private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     private GoogleApiClient mGoogleApiClient;
     public static final String ACTIVITY_TAG = LogLocationActivity.class.getSimpleName();
+    public static final String filename = "myLogLocationFile";
+    FileOutputStream outputStream;
+    FileInputStream inputStream;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // setup Google Api Client
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
@@ -37,6 +48,7 @@ public class LogLocationActivity extends FragmentActivity implements GoogleApiCl
 
     @Override
     public void onConnected(Bundle  bundle){
+        // get last known location once connected
         Log.i(ACTIVITY_TAG, "GOW:Location services connected.");
         // Location lastKnownLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         Location lastKnownLocation = new Location("gps");
@@ -50,19 +62,68 @@ public class LogLocationActivity extends FragmentActivity implements GoogleApiCl
             Log.d(ACTIVITY_TAG, lastKnownLocation.toString());
         }
 
+        // log last known location to file
+        writeLocationToFile(lastKnownLocation);
+
+        // follow the device; keep logging the location to file
         keepLogging(lastKnownLocation);
+
+        // read back the logged content from file
+        readLogged();
     }
 
+    // write the location content to a file in internal storage
+    // takes in Location object. [file name from parent class]
+    private void writeLocationToFile(Location lastKnownLocation) {
+        try {
+            outputStream = openFileOutput(filename, Context.MODE_APPEND);
+            outputStream.write(lastKnownLocation.toString().getBytes());
+            Log.i(ACTIVITY_TAG, "GOW:wrote that to a file");
+            outputStream.close();
+        } catch (Exception e) {
+            Log.e(ACTIVITY_TAG, "GOW:Could not write to file. Here is why?");
+            e.printStackTrace();
+            Log.e(ACTIVITY_TAG, "GOW:End of StackTrace: Could not write to file. Here is why?");
+
+        }
+    }
+
+    // continue to log location to file
     private void keepLogging(Location lastKnownLocation) {
         Double latitude = lastKnownLocation.getLatitude();
         Double longitude = lastKnownLocation.getLongitude();
 
+        // temp logging instead of tracking actual movement
         for(int i=0; i < 20; i=i+1){
-            lastKnownLocation.setLatitude(latitude + 10);
-            lastKnownLocation.setLongitude(longitude + 10);
+            lastKnownLocation.setLatitude(latitude + 1);
+            lastKnownLocation.setLongitude(longitude + 1);
             latitude = lastKnownLocation.getLatitude();
             longitude = lastKnownLocation.getLongitude();
             Log.i(ACTIVITY_TAG, lastKnownLocation.toString());
+            writeLocationToFile(lastKnownLocation);
+        }
+    }
+
+    private void readLogged() {
+        // read data from file and append lines to a line. log it.
+        try {
+            inputStream = openFileInput(filename);
+            InputStreamReader isr = new InputStreamReader(inputStream);
+            BufferedReader bufferedReader = new BufferedReader(isr);
+            StringBuilder sb = new StringBuilder();
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                sb.append(line);
+            }
+            Log.i(ACTIVITY_TAG, "GOW:Start of file content");
+            Log.i(ACTIVITY_TAG, sb.toString());
+            Log.i(ACTIVITY_TAG, "GOW:End of file content");
+            outputStream.close();
+        } catch (Exception e) {
+            Log.e(ACTIVITY_TAG, "GOW:Could not write to file. Here is why?");
+            e.printStackTrace();
+            Log.e(ACTIVITY_TAG, "GOW:End of StackTrace: Could not write to file. Here is why?");
+
         }
     }
 
