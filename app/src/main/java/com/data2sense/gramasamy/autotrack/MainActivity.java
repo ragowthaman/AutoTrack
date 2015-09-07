@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
     /** Called when the user clicks Start logging button */
     public void displayLocationLogScreen(View view){
-        Intent intent = new Intent(this, LocationLogActivity.class);
+        Intent intent = new Intent(this, MiddleMenuActivity.class);
         startActivity(intent);
     }
 }

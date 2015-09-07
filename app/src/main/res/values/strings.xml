@@ -17,9 +17,10 @@
     <string name="title_activity_starttrip">StarttripActivity</string>
     <string name="title_activity_strat_trip">StratTripActivity</string>
     <string name="skip_button_label">Skip!</string>
-    <string name="title_activity_location_log">LocationLogActivity</string>
+    <string name="title_activity_location_log">MiddleMenuActivity</string>
     <string name="colon_separator"> : </string>
     <string name="date_registered_label">Date Registered</string>
 
     <string name="PREFERENCE_FILE">MyPrefsFile</string>
+    <string name="title_activity_log_location">LogLocation</string>
 </resources>
